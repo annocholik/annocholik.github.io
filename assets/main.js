@@ -6,16 +6,21 @@ let Web = {
 
         mainPart.show = true;
         projects.show = false;
-        projects.style.opacity = 0;
+        projects.style.height = 0;
+        projects.style.width = 0;
         about.show = false;
+        about.style.height = 0;
+        about.style.width = 0;
 
         document.body.appendChild(mainPart);
         document.body.appendChild(projects);
         document.body.appendChild(about);
 
-        Web.navBar(mainPart, projects, about);
+        Web.navBar([mainPart, projects, about]);
+        Web.aboutMe(mainPart);
         Web.projects(mainPart);
         Web.projects(projects);
+        Web.aboutMe(about);
     },
 
     navBar(parts) {
@@ -25,19 +30,90 @@ let Web = {
         const showPart = (index) => {
             for (var part of parts) {
                 if (part.show === true) {
-                    textBlock.style.animationName = 'FadeOut';
+                    part.style.width = '0';
+                    part.style.height = '0';
+                    part.show = false;
                 }
             }
-        }
+            parts[index].style.width = '100%';
+            parts[index].style.height = 'calc(100% - 48px)';
+            parts[index].show = true;
+        };
 
         for (var index in values) {
             var button = document.createElement('option');
+            button.onclick = showPart.bind(null, index);
             button.appendChild(document.createTextNode(values[index]));
             navBar.appendChild(button);
         }
 
 
         document.body.appendChild(navBar);
+    },
+
+    aboutMe(mainElement) {
+        const aboutMe = Helper.createClass('aboutMe');
+        const textBlock = Helper.createClass('textBlock');
+
+        const header = Helper.createClass('header');
+        header.innerText = Data.aboutMe.header;
+        textBlock.appendChild(header);
+
+        var space = Helper.createClass('text');
+        space.innerText = '';
+        space.style.textAlign = 'left';
+        textBlock.appendChild(space);
+
+        var highlight = Helper.createClass('highlight');
+        highlight.innerText = 'CURRICULUM VITAE';
+        highlight.style.textAlign = 'left';
+        textBlock.appendChild(highlight);
+
+        console.log(Data.aboutMe.experience);
+
+        for (var experience of Data.aboutMe.experience) {
+            const experienceTitle = Helper.createClass('text');
+            experienceTitle.innerText = experience.title;
+            experienceTitle.style.textAlign = 'left';
+            experienceTitle.style.fontWeight = 'bold';
+            textBlock.appendChild(experienceTitle);
+
+            const experienceText = Helper.createClass('text');
+            experienceText.innerText = experience.text;
+            experienceText.style.textAlign = 'left';
+            textBlock.appendChild(experienceText);
+
+            space = Helper.createClass('text');
+            space.innerText = '';
+            space.style.textAlign = 'left';
+            textBlock.appendChild(space);
+        }
+
+        highlight = Helper.createClass('highlight');
+        highlight.innerText = 'Wykształcenie';
+        highlight.style.textAlign = 'right';
+        textBlock.appendChild(highlight);
+
+        for (var education of Data.aboutMe.education) {
+            const educationTitle = Helper.createClass('text');
+            educationTitle.innerText = education.title;
+            educationTitle.style.textAlign = 'right';
+            educationTitle.style.fontWeight = 'bold';
+            textBlock.appendChild(educationTitle);
+
+            const educationText = Helper.createClass('text');
+            educationText.innerText = education.text;
+            educationText.style.textAlign = 'right';
+            textBlock.appendChild(educationText);
+
+            space = Helper.createClass('text');
+            space.innerText = '';
+            space.style.textAlign = 'right';
+            textBlock.appendChild(space);
+        }
+
+        aboutMe.appendChild(textBlock);
+        mainElement.appendChild(aboutMe);
     },
 
     projects(mainElement) {

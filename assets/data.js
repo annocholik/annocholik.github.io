@@ -36,5 +36,32 @@ let Data = {
                    - zarządzanie danymi w pamięci operacyjnej karty graficznej VRAM,`
         },
         internalImages: []
-    }]
+    }],
+    aboutMe: {
+        header: "Paweł Sołtysik",
+        education: [{
+            title: 'Uniwersytet Śląski (2017 - obecnie)',
+            text: `Magister inżynier, kierunek informatyka`
+        }, {
+            title: 'Uniwersytet Śląski (2014 - 2017)',
+            text: `Inżynier informatyki, specjalista programista gier komputerowych
+                Tytuł pracy dyplomowej: Silnik graficzny 3D`
+        }],
+        experience: [{
+            title: 'DAZN Media Poland (2019 - Obecnie)',
+            text: `Stanowisko: Software Engineer Node.JS`
+        }, {
+            title: 'Incuvo SA (2016 - 2019)',
+            text: `Stanowisko: Programista C# Unity / Node.JS
+                Projekty:
+                - Castle Revenge (Android, IOS, Backend),
+                - Super Hero Fight Club (Android, IOS, Nintendo Switch, Backend),
+                - Createrria 2 (Backend)
+                - GameInn - “Inteligentny system matchmakingu typu użytkownik-zawartość lub
+                użytkownik-użytkownik, przeznaczony dla gier online dla wielu graczy” (Backend)`
+        }, {
+            title: 'The Farm 51 Group SA (2015)',
+            text: `Projekt: Get Even (PC, PlayStation 4, Xbox One)`
+        }]
+    }
 };
